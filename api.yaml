@@ -1,0 +1,564 @@
+openapi: 3.0.0
+info:
+  title: Example Open API Documentation
+  version: 1.0.0
+  description: |
+    Documentation example. You can add various kinds of **documentation** here. It takes both markdown and HTML.
+    <h2>ER Diagram</h2>
+    <h2> Error Codes </h2>  <table>
+      <thead>
+        <th>Resource</th>
+        <th>Error Code</th>
+        <th>Message</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>User</td>
+        <td>BE1001</td>
+        <td>username alrady exist</td>
+      </tr>
+      <tr>
+        <td>User</td>
+        <td>BE1002</td>
+        <td>username is required</td>
+      </tr>
+      <tr>
+        <td>User</td>
+        <td>BE1003</td>
+        <td>user not present</td>
+      </tr>
+      <tr>
+        <td>Card_list</td>
+        <td>BE1004</td>
+        <td>card_list not present</td>
+      </tr>
+      <tr>
+        <td>Card_list</td>
+        <td>BE1005</td>
+        <td>list is not orned by the user</td>
+      </tr>
+      <tr>
+        <td>Card_list</td>
+        <td>BE1006</td>
+        <td>card_list name is required</td>
+      </tr>
+      <tr>
+        <td>Card_list</td>
+        <td>BE1007</td>
+        <td>user_id is required</td>
+      </tr>
+      <tr>
+        <td>Card_list</td>
+        <td>BE1008</td>
+        <td>card_list is not orned by the user</td>
+      </tr>
+      <tr>
+        <td>Card</td>
+        <td>BE1009</td>
+        <td>card is not in card_list</td>
+      </tr>
+      <tr>
+        <td>Card</td>
+        <td>BE1010</td>
+        <td>card not present</td>
+      </tr>
+      
+      </tbody>
+    </table>
+servers:
+  - url: http://127.0.0.1:5000/
+paths:
+  /api/user/{username}:
+    description: >-
+      End point to read a user resource with username.
+    get:
+      description: Operation to get a user details
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: gunanidhi3vedi
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  user_id:
+                    type: integer
+                    example: 1
+                  username:
+                    type: string
+                    example: gunanidhi3vedi
+                  name:
+                    type: string
+                    example: GUNANIDHI TRIVEDI
+        '400':
+          description: Bad request.
+        '404':
+          description: Resource not found.
+        '500':
+          description: Internal Server Error.
+ 
+  /api/user:
+    description: End point to create a user.
+    post:
+      description: Operation to create the user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: user object
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: "gunanidhi3vedi"
+                name:
+                  type: string
+                  example: "GUNANIDHI TRIVEDI"
+                password:
+                  type: string
+                  example: "1234"
+      responses:
+        '201':
+          description: Successfully Created.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error.
+          
+       
+  /api/card_list/{user_id}/{card_list_id}:
+    description: >-
+       End point to read a list resource with user_id and card_list_id.
+    get:
+      description: Operation to get list details
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: integer 
+            example: 1
+        - in: path
+          name: card_list_id
+          required: true
+          schema:
+            type: integer 
+            example: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: "list 1"
+                  description:
+                    type: string
+                    example: "description1"
+                  user_id:
+                    type : integer
+                    example: 1
+        '400':
+          description: Bad request.
+        '404':
+          description: Resource not found.
+        '500':
+          description: Internal Server Error.  
+  
+    put:
+      description: Operation to update the list detail
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: integer 
+            example: 1
+        - in: path
+          name: card_list_id
+          required: true
+          schema:
+            type: integer 
+            example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "list 1" 
+                description:
+                  type: string
+                  example: "description"
+      responses:
+        '200':
+          description: Successfuly updated.
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: "list 1"
+                  description:
+                    type: string
+                    example: "description1"
+                  user_id:
+                    type : integer
+                    example: 1
+                    
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+          
+          
+    delete:
+      description: Operation to delete the list .
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: integer 
+            example: 1
+        - in: path
+          name: card_list_id
+          required: true
+          schema:
+            type: integer 
+            example: 1
+      responses:
+        '200':
+          description: Successfully Deleted.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Intenal Server Error.      
+  
+          
+  /api/card_list:
+    description: End point to create a list.
+    post:
+      description: Operation to create the list 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: user object
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "list 1"
+                description:
+                  type: string
+                  example: "description"
+                user_id:
+                  type: integer
+                  example: 1
+      responses:
+        '201':
+          description: Successfully Created.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error.
+          
+         
+#          card opratiopn 
+
+
+
+  /api/card_list/{user_id}/{card_list_id}/{card_id}:
+    description: >-
+       End point to read a card resource .
+    get:
+      description: Operation to get a card details
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: integer 
+            example: 1
+        - in: path
+          name: card_list_id
+          required: true
+          schema:
+            type: integer 
+            example: 1
+        - in: path
+          name: card_id
+          required: true
+          schema:
+            type: integer 
+            example: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: "card 1"
+                  content:
+                    type: string
+                    example: "content1"
+                  deadline:
+                    type : string
+                    example: "01-01-0001"
+                  last_updated:
+                    type : string
+                    example: "01-01-0001"
+                  completion_date:
+                    type : string
+                    example: "01-01-0001"
+                  complete :
+                   type : string
+                   example: "False"
+                  card_list_id:
+                    type : integer 
+                    example: 1
+                    
+                    
+                    
+        '400':
+          description: Bad request.
+
+        '500':
+          description: Internal Server Error.  
+  
+    put:
+      description: Operation to update the user detail
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: integer 
+            example: 1
+        - in: path
+          name: card_list_id
+          required: true
+          schema:
+            type: integer 
+            example: 1
+        - in: path
+          name: card_id
+          required: true
+          schema:
+            type: integer 
+            example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "card 1"
+                content:
+                   type: string
+                   example: "content1"
+                deadline:
+                   type : string
+                   example: "01-01-0001"
+                complete :
+                   type : string
+                   example: "False"
+                card_list_id:
+                   type : integer 
+                   example: 1
+      responses:
+        '200':
+          description: Successfuly updated.
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: "list 1"
+                  description:
+                    type: string
+                    example: "description1"
+                  user_id:
+                    type : integer
+                    example: 1
+                    
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+          
+          
+    delete:
+      description: Operation to delete the card_list .
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: integer 
+            example: 1
+        - in: path
+          name: card_list_id
+          required: true
+          schema:
+            type: integer 
+            example: 1
+        - in: path
+          name: card_id
+          required: true
+          schema:
+            type: integer 
+            example: 1
+      responses:
+        '200':
+          description: Successfully Deleted.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Intenal Server Error.      
+  
+          
+  /api/card_list/{user_id}/card:
+    description: End point to create a card_list.
+    post:
+      description: Operation to create the card_list .
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: integer 
+            example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: user object
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "card 1"
+                content:
+                   type: string
+                   example: "content1"
+                deadline:
+                   type : string
+                   example: "01-01-0001"
+                complete :
+                   type : boolean 
+                   example: false
+                card_list_id:
+                   type : integer 
+                   example: 1
+      responses:
+        '201':
+          description: Successfully Created.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error.
+          

@@ -1,0 +1,89 @@
+{% extends "base2.html" %} 
+{% block title %} Summary {% endblock %} 
+{% block user %} Welcome {{ user.username }} {% endblock %} 
+{% block style %} 
+
+<style>
+
+.div-1{
+    box-sizing: border-box;
+    padding: 5% 25%;
+
+    color: aliceblue;
+  }
+
+  body {
+    color: rgb(254, 254, 254);
+  }
+
+  h1 {
+    padding-top: 10px;
+  }
+
+  h3,p {
+    text-align: center;
+  }
+
+  .graph-div {
+    background-color: aliceblue;
+    width: 640px;
+    border-radius: 10px;
+  }
+
+  .graph {
+    display: flex;
+    justify-content: center;
+  }
+
+</style>
+
+{% endblock %}
+
+{% block nevbar %}
+<li class="nav-item">
+  <a class="nav-link" href="/">Home</a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="div-1">
+  
+  <h1 align="center">Summary</h1>
+  <br />
+  <br />
+  <hr />
+  
+  {% for i in graph_list %} 
+  {% if i[1] == "no_card" %}
+  
+  <h3>{{lists[i[0]].name}}</h3>
+  <p>{{lists[i[0]].description}}</p>
+  <p>no card present</p>
+  
+  {% else %}
+  
+  <h3>{{lists[i].name}}</h3>
+  <p>{{lists[i].description}}</p>
+  <p>Total no. of card -> {{list_detail[i][2]}}</p>
+  <p>No of completed card -> {{list_detail[i][0]}}</p>
+  <p>No of panding card -> {{list_detail[i][1]}}</p>
+  <div>
+    <h3>completed and panding graph</h3>
+    <div class="graph">
+      <div class="graph-div">
+        <img src="static/image{{i}}_1.png" alt="hii" />
+      </div>
+    </div>
+  </div>
+<br />
+<br />
+{% endif %}
+<hr />
+{% endfor %}
+
+<div style="text-align: center">
+  <a href="/">Back</a>
+</div>
+<br>
+</div>
+{% endblock %}

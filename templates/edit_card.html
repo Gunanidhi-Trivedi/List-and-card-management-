@@ -1,0 +1,86 @@
+{% extends "base2.html" %}
+
+{% block title %} Edit card {% endblock %}
+
+{% block style %} 
+
+<style>
+  
+  .div-1{
+    box-sizing: border-box;
+    padding: 5% 25%;
+
+    color: aliceblue;
+  }
+  body{
+    background-color: rgb(69, 77, 81);
+  }
+
+  .form-group{
+    padding: 15px;
+  }
+
+</style>
+
+{% endblock %}
+
+{% block nevbar %}
+<li class="nav-item">
+  <a class="nav-link" href="/">Home</a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="/summary">summary</a>
+</li>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="div-1">
+
+  
+  <h1 align="center">Edit Card</h1>
+  <hr>
+
+  <form method="POST">
+    <div class="form-group">
+      <label >List <span style="color:brown;">*</span> </label>
+      <select name="list" class="form-control">
+        {% for list in user.lists %}
+        {% if list.id == card.card_list_id %}
+        <option value="{{ list.id }}" selected>{{ list.name }}</option>
+        {% else %}
+        <option value="{{ list.id }}" >{{ list.name }}</option>
+        {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label >Title <span style="color:brown;">*</span> </label>
+      <input type="text" class="form-control" value="{{ card.titles }}" name="title" required>
+    </div>
+    <div class="form-group">
+      <label >Content</label>
+      <input type="text" class="form-control" value="{{ card.content }}" name="content" required>
+    </div>
+    <div class="form-group">
+      <label >Deadline <span style="color:brown;">*</span> </label>
+      <input type="date" class="form-control" name="date" value="{{ date_ymd(card.deadline) }}" required >
+    </div>
+    
+    <div class="form-group">
+      <label for="scales">Mark as complete</label>
+      {% if card.complete == 1 %}
+      <input type="checkbox"  name="complete" value="1" checked>
+      {% else %}
+      <input type="checkbox"  name="complete" value="1" >
+      {% endif %}  
+    </div>
+    <div class="form-group">
+      <button class="btn btn-success" type="submit">Submit</button>
+    </div>
+  </form>
+  
+</div>
+  {% endblock %}

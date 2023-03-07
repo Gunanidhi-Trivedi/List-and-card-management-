@@ -1,0 +1,49 @@
+.list{
+    /* background-color: rgb(230, 223, 223); */
+    /* border-left: 12px solid ;
+    border-right: 12px solid ; */
+    max-width: 280px;
+    min-width: 270px;
+    
+    padding: 0%;
+    padding-top: 10px;
+    padding-bottom: 15px;
+
+    border-radius: 10px;
+
+
+    background: #DFC2F2;
+	background-image: linear-gradient( to right, #b3eebf,#8cf7f4 ,#9de9bf,#a0a8f6);
+	background-attachment: fixed;	
+	background-size: cover;
+    box-sizing: border-box;
+}
+
+
+.list_contaner{
+    
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    justify-content: space-around;
+    row-gap: 50px;
+    
+
+
+
+}
+
+body{
+    background-color:rgb(86, 94, 92);
+	/* background-image: linear-gradient( to right, #34907d,#313b99); */
+	background-attachment: fixed;	
+	background-size: cover;
+    
+
+}
+
+nev-option{
+    position: absolute;
+    right: 10px;
+}
