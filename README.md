@@ -1,17 +1,17 @@
 # List-and-card-management-
 
 
-# Local_setup ################################################
+## Local_setup ################################################
 
-# Creating virtual environment  
+### Creating virtual environment  
 - `python -m venv .env`
-# Activate the virtual environment 
+### Activate the virtual environment 
 - `.env\Scripts\activate`
 
-# Install all the required packages
+### Install all the required packages
 - `pip inatall -r requirements.txt`
 
-# Start the server
+### Start the server
 - `python main.py`
 
 
