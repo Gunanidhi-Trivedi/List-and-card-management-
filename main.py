@@ -94,9 +94,13 @@ class Card(db.Model):
 
 
 def create_database(app):
-    if not path.exists("database.sqlite3"):
-        db.create_all(app=app)
-        print('Created Database!')
+    with app.app_context():
+        if not path.exists("database.sqlite3"):
+            db.create_all()
+            print('Created Database!')
+    # if not path.exists("database.sqlite3"):
+    #     db.create_all(app=app)
+    #     print('Created Database!')
 
 create_database(app)
 
