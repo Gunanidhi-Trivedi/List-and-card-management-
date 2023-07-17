@@ -4,3 +4,10 @@ Flask-RESTful
 Flask-SQLAlchemy
 matplotlib
 Werkzeug
+click
+gunicorn
+importlib-metadata
+itsdangerous
+Jinja2
+MarkupSafe
+zipp
